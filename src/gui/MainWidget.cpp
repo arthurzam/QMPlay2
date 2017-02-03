@@ -420,7 +420,7 @@ MainWidget::MainWidget(QList<QPair<QString, QString>> &arguments)
     });
 #endif
 
-    playlistDock->load(QMPlay2Core.getSettingsDir() + "Playlist.pls");
+    playlistDock->loadAll();
 
     bool noplay = false;
     for (const auto &argument : qAsConst(arguments))
@@ -1812,7 +1812,7 @@ void MainWidget::closeEvent(QCloseEvent *e)
 
     if (settings.getBool("AutoDelNonGroupEntries"))
         playlistDock->delNonGroupEntries(true);
-    playlistDock->save(QMPlay2Core.getSettingsDir() + "Playlist.pls");
+    playlistDock->saveAll();
 
     playC.stop(true);
 
