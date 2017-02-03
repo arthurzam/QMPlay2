@@ -1252,7 +1252,7 @@ void MainWidget::loadPlist()
 }
 void MainWidget::savePlist()
 {
-    savePlistHelper(tr("Save playlist"), QMPlay2GUI.getCurrentPth(playlistDock->getUrl()), false);
+    savePlistHelper(tr("Save playlist \"%1\"").arg(playlistDock->getCurrentPlaylistName()), QMPlay2GUI.getCurrentPth(playlistDock->getUrl()), false);
 }
 void MainWidget::saveGroup()
 {
