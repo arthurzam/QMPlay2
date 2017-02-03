@@ -159,6 +159,7 @@ MenuBar::Playlist::Playlist(MenuBar *parent) :
     addSeparator();
     newAction(Playlist::tr("Load &list"), this, loadPlist, false, QIcon(), false);
     newAction(Playlist::tr("Save &list"), this, savePlist, false, QIcon(), false);
+    newAction(Playlist::tr("Close &list"), this, delPlist, false, QIcon(), false);
     newAction(Playlist::tr("Save &group"), this, saveGroup, false, QIcon(), false);
     addSeparator();
     newAction(QString(), this, lock, false, QIcon(), false);
@@ -588,6 +589,7 @@ void MenuBar::setKeyShortcuts()
     shortcuts->appendAction(playlist->quickSync, "KeyBindings/Playlist-quickSync", "F5");
     shortcuts->appendAction(playlist->loadPlist, "KeyBindings/Playlist-loadPlist", "Ctrl+L");
     shortcuts->appendAction(playlist->savePlist, "KeyBindings/Playlist-savePlist", "Ctrl+S");
+    shortcuts->appendAction(playlist->delPlist, "KeyBindings/Playlist-delPlist", "Ctrl+W");
     shortcuts->appendAction(playlist->saveGroup, "KeyBindings/Playlist-saveGroup", "Ctrl+Shift+S");
     shortcuts->appendAction(playlist->delEntries, "KeyBindings/Playlist-delEntries", "Del");
     shortcuts->appendAction(playlist->delEntriesFromDisk, "KeyBindings/Playlist-delEntriesFromDisk", "Alt+Del");
