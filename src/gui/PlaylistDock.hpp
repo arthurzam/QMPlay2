@@ -131,6 +131,7 @@ public slots:
 
     void newPlaylist();
     void playlistsCloseTab(int index = -1);
+    void playlistsTabDoubleClicked(int index = -1);
 signals:
     void play(const QString &);
     void repeatEntry(bool b);
