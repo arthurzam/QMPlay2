@@ -131,6 +131,7 @@ public slots:
     void repeat();
     void updateCurrentEntry(const QString &, double);
 
+    void newPlaylist();
     void playlistsCloseTab(int index = -1);
 signals:
     void play(const QString &);
