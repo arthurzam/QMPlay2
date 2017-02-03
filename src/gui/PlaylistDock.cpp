@@ -37,6 +37,7 @@
 #include <QRandomGenerator>
 #include <QDir>
 #include <QToolButton>
+#include <QInputDialog>
 
 static bool urlMatchesWithItem(QTreeWidgetItem *item, const QString &url)
 {
@@ -79,6 +80,7 @@ PlaylistDock::PlaylistDock() :
     connect(findE, SIGNAL(returnPressed()), this, SLOT(findNext()));
     connect(m_playlistsW, SIGNAL(tabCloseRequested(int)), this, SLOT(playlistsCloseTab(int)));
     connect(m_playlistsW, SIGNAL(currentChanged(int)), this, SLOT(playlistsTabsCurrentChanged(int)));
+    connect(m_playlistsW, SIGNAL(tabBarDoubleClicked(int)), this, SLOT(playlistsTabDoubleClicked(int)));
 
     QAction *act = new QAction(this);
     act->setShortcuts(QList<QKeySequence>() << QKeySequence("Return") << QKeySequence("Enter"));
@@ -871,4 +873,14 @@ void PlaylistDock::playlistsCloseTab(int index)
         m_currPlaylist = (PlaylistWidget *)m_playlistsW->currentWidget();
 
     delete list;
+}
+void PlaylistDock::playlistsTabDoubleClicked(int index)
+{
+    if (index == -1)
+        index = m_playlistsW->currentIndex();
+    bool ok;
+    const QString prevName = m_playlistsW->tabText(index);
+    const QString newName = QInputDialog::getText(this, tr("Rename Playlist Name"), tr("Rename \"%1\" to:").arg(prevName), QLineEdit::Normal, prevName, &ok);
+    if (ok && !newName.isEmpty() && newName != prevName)
+        m_playlistsW->setTabText(index, newName);
 }
