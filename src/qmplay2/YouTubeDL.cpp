@@ -36,11 +36,7 @@ static QMutex g_mutex(QMutex::Recursive);
 
 QString YouTubeDL::getFilePath()
 {
-    return QMPlay2Core.getSettingsDir() + "youtube-dl"
-#ifdef Q_OS_WIN
-    ".exe"
-#endif
-    ;
+    return QStringLiteral("/usr/bin/youtube-dl");
 }
 QStringList YouTubeDL::getCommonArgs()
 {
@@ -356,6 +352,7 @@ bool YouTubeDL::download()
 }
 bool YouTubeDL::update()
 {
+#if 0
     // Mutex must be locked here
 
     qDebug() << "\"youtube-dl\" updates will be checked";
@@ -420,6 +417,7 @@ bool YouTubeDL::update()
     }
 
     QMPlay2Core.setWorking(false);
+#endif
     return true;
 }
 
