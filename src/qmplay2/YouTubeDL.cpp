@@ -52,11 +52,7 @@ static inline QString getYtDlpFileName()
 
 QString YouTubeDL::getFilePath()
 {
-#ifdef Q_OS_HAIKU
-    return "/bin/" + getYtDlpFileName();
-#else
-    return QMPlay2Core.getSettingsDir() + getYtDlpFileName();
-#endif
+    return QStringLiteral("/usr/bin/yt-dlp");
 }
 QStringList YouTubeDL::getCommonArgs()
 {
@@ -327,9 +323,7 @@ bool YouTubeDL::prepare()
 
 bool YouTubeDL::download()
 {
-#if defined(Q_OS_HAIKU)
-    return true;
-#endif
+#if 0
     // Mutex must be locked here
 
     const QString downloadUrl = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/" + getYtDlpFileName();
@@ -376,16 +370,12 @@ bool YouTubeDL::download()
 
     QMPlay2Core.setWorking(false);
     return false;
+#endif
+    return true;
 }
 bool YouTubeDL::update()
 {
-#if defined(Q_OS_HAIKU)
-    return true;
-#endif
-
-    if (QMPlay2Core.getSettings().getBool("SkipYtDlpUpdate"))
-        return true;
-
+#if 0
     // Mutex must be locked here
 
     qDebug() << "\"yt-dlp\" updates will be checked";
@@ -432,6 +422,7 @@ bool YouTubeDL::update()
     }
 
     QMPlay2Core.setWorking(false);
+#endif
     return true;
 }
 
