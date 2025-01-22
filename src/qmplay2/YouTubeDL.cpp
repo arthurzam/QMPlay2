@@ -58,9 +58,7 @@ static QString getCustomFilePath()
 
 QString YouTubeDL::getFilePath()
 {
-    if (auto customPath = getCustomFilePath(); !customPath.isEmpty())
-        return customPath;
-    return QMPlay2Core.getSettingsDir() + getYtDlpFileName();
+    return QStringLiteral("/usr/bin/yt-dlp");
 }
 QStringList YouTubeDL::getCommonArgs()
 {
@@ -359,6 +357,7 @@ bool YouTubeDL::prepare()
 
 bool YouTubeDL::download()
 {
+#if 0
     // Mutex must be locked here
 
     if (!getCustomFilePath().isEmpty())
@@ -413,9 +412,12 @@ bool YouTubeDL::download()
 
     qCritical() << "Unable to download \"youtube-dl\"";
     return false;
+#endif
+    return true;
 }
 bool YouTubeDL::update()
 {
+#if 0
     if (QMPlay2Core.getSettings().getBool("YtDl/DontAutoUpdate"))
         return true;
 
@@ -465,6 +467,7 @@ bool YouTubeDL::update()
     }
 
     QMPlay2Core.setWorking(false);
+#endif
     return true;
 }
 
